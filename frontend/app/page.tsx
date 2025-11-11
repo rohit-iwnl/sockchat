@@ -42,8 +42,9 @@ export default function Home() {
   }, [messages]);
 
   const connectWebSocket = (userName: string) => {
+    const wsUrl = process.env.NEXT_PUBLIC_WS_URL || "http://localhost:8080";
     const client = new Client({
-      webSocketFactory: () => new SockJS("http://localhost:8080/wss"),
+      webSocketFactory: () => new SockJS(`${wsUrl}/wss`),
       onConnect: () => {
         setIsConnected(true);
         
